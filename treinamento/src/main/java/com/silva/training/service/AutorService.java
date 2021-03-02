@@ -1,5 +1,7 @@
 package com.silva.training.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -42,9 +44,19 @@ public class AutorService {
 	public Page<AutorDTO> listarPaginado(PaginadoDTO<String> paginadoDto) {
 		Pageable paginacao = PageRequest.of(paginadoDto.getNumPagina(), paginadoDto.getQntPorPagina());
 		Page<Autor> lista = null;
-		if(paginadoDto.getFiltro() == null) { lista = repository.findAll(paginacao); }
-		else { lista = repository.findByNomeContainsIgnoreCase(paginacao, paginadoDto.getFiltro());}
-		return new PageImpl<AutorDTO>(converter.toListEntityToDto(lista.getContent()), paginacao, lista.getTotalElements());
+		if (paginadoDto.getFiltro() == null) {
+			lista = repository.findAll(paginacao);
+		} else {
+			lista = repository.findByNomeContainsIgnoreCase(paginacao, paginadoDto.getFiltro());
+		}
+		return new PageImpl<AutorDTO>(converter.toListEntityToDto(lista.getContent()), paginacao,
+				lista.getTotalElements());
+	}
+
+	@Transactional
+	public AutorDTO buscarAutorId(Long id) {
+		Autor autor = repository.findById(id).get();
+		return converter.toEntityToDto(autor);
 	}
 
 }

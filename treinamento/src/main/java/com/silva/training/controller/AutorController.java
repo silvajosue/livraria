@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,5 +50,11 @@ public class AutorController {
 	@PostMapping(value = "/listar-paginado", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Page<AutorDTO>> listarPaginado(@RequestBody PaginadoDTO<String> paginadoDto) {
 		return ResponseEntity.ok(service.listarPaginado(paginadoDto));
+	}
+
+	@ApiOperation(value = "Endpoint responsavel por recuperar item por id")
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<AutorDTO> buscarEditoraId(@PathVariable Long id) {
+		return ResponseEntity.ok(service.buscarAutorId(id));
 	}
 }

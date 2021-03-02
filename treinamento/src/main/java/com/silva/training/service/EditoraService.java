@@ -1,5 +1,7 @@
 package com.silva.training.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,12 @@ public class EditoraService {
 	public EditoraDTO inserir(EditoraDTO editoraDto) {
 		Editora editora = converter.toDtoToEntity(editoraDto);
 		repository.save(editora);
+		return converter.toEntityToDto(editora);
+	}
+
+	@Transactional
+	public EditoraDTO buscarEditoraId(Long id) {
+		Editora editora = repository.findById(id).get();
 		return converter.toEntityToDto(editora);
 	}
 

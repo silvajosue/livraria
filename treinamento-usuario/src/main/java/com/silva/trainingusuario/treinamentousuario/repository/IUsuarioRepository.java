@@ -6,4 +6,5 @@ import com.silva.trainingusuario.treinamentousuario.model.Usuario;
 
 public interface IUsuarioRepository extends JpaRepository<Usuario, Long>{
 
+	Usuario findByEmail(String email);
 }
