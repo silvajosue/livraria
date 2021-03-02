@@ -9,9 +9,6 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @SpringBootApplication
 @EnableConfigServer
 public class TreinamentoServerApplication implements CommandLineRunner{
-
-	@Value("${spring.cloud.config.server.git.username}")
-	private String username;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TreinamentoServerApplication.class, args);
@@ -19,7 +16,6 @@ public class TreinamentoServerApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		//System.out.println("USERNAME = " + username);
 	}
 
 }
