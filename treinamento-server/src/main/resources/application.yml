@@ -1,0 +1,15 @@
+server:
+    port: 8888
+
+spring:
+  application:
+    name: treinamento-server
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/acenelio/ms-course-configs #Alterar
+          username: ${GITHUB_USER}
+          password: ${GITHUB_PASS}
+  
