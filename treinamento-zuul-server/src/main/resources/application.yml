@@ -25,16 +25,16 @@ ribbon:
 zuul:
   routes:
     worker:
-      service-id: hr-worker
-      path: /hr-worker/**
+      service-id: treinamento-usuario
+      path: /treinamento-usuario/**
     payroll:
-      service-id: hr-payroll
-      path: /hr-payroll/**
+      service-id: treinamento
+      path: /treinamento/**
     user:
-      service-id: hr-user
-      path: /hr-user/**
+      service-id: treinamento-login
+      path: /treinamento-login/**
     oauth:
-      service-id: hr-oauth
-      path: /hr-oauth/**
+      service-id: treinamento-oauth
+      path: /treinamento-oauth/**
       sensitive-headers: Cookie,Set-Cookie
 
