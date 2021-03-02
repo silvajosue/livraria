@@ -2,14 +2,9 @@ package com.silva.trainingusuario.treinamentousuario.model.dtos;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "TB_USUARIO")
 @Data
 @NoArgsConstructor
 public class UsuarioDTO implements Serializable {
