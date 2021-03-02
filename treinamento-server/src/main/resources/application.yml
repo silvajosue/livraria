@@ -9,7 +9,7 @@ spring:
       server:
         git:
           default-label: main
-          uri: https://github.com/acenelio/ms-course-configs #Alterar
+          uri: https://github.com/silvajosue/livraria-autorizacao #Alterar
           username: ${GITHUB_USER}
           password: ${GITHUB_PASS}
   
