@@ -27,4 +27,11 @@ public class UsuarioController {
 	public ResponseEntity<UsuarioDTO> findByEmail(@RequestParam String email) {
 		return ResponseEntity.ok(service.findByEmail(email));
 	}
+	
+	@ApiOperation(value = "Endpoint responsavel por criar um novo usuario no banco de dados")
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AutorDTO> novoUsuario(@RequestBody UsuarioDTO usuarioDto) {
+		//TODO terminar de criar o endpoint
+		return ResponseEntity.ok(service.inserir(usuarioDto));
+	}
 }
