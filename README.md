@@ -5,33 +5,33 @@ Microsserviços criados com Spring cloud, Eureka, Hystrix, Oauth2 e spring web
 
 # Tecnologias:
 
-**Spring boot
+## **Spring boot**
 
-**Spring Cloud
+### **Spring Cloud**
 
-**Spring Web
+### **Spring Web**
 
-**Spring JPA
+### **Spring JPA**
 
-**Actuator
+### **Actuator**
 
-**Swagger2
+## **Swagger2**
 
-**Eureka Server
+## **Eureka Server**
 
-**Eureka Client
+## **Eureka Client**
 
-**Oauth2
+## **Oauth2**
 
-**Hystrix
+## **Hystrix**
 
-**OpenFeign
+## **OpenFeign**
 
-**Zuul
+## **Zuul**
 
-**Lombok
+## **Lombok**
 
-**Postgresql
+## **Postgresql**
 
 
-Created by Josué Silva
+### **Created by Josué Silva**
