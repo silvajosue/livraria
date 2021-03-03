@@ -5,7 +5,7 @@ Microsserviços criados com Spring cloud, Eureka, Hystrix, Oauth2 e spring web
 
 # Tecnologias:
 
-### **Java**
+### **Java 8**
 
 ### **Spring boot**
 
