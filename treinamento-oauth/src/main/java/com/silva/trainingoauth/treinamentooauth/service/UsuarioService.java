@@ -23,7 +23,7 @@ private static Logger logger = LoggerFactory.getLogger(UsuarioService.class);
 	
 	@Autowired
 	private UsuarioConverter converter;
-	
+/*	
 	public UsuarioDTO findByEmail(String email) {
 		Usuario usuario = userFeignClient.findByEmail(email).getBody();
 		if (usuario == null) {
@@ -33,7 +33,8 @@ private static Logger logger = LoggerFactory.getLogger(UsuarioService.class);
 		logger.info("Email found: " + email);
 		return converter.toEntityToDto(usuario);
 	}
-
+	Não necessario
+*/
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = userFeignClient.findByEmail(username).getBody();
