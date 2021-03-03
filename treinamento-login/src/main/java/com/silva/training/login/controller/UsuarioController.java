@@ -52,4 +52,11 @@ private static Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 		
 		return ResponseEntity.ok(service.buscarUsuarioId(id));
 	}
+	
+	@ApiOperation(value = "Endpoint responsavel por criar um novo usuario no banco de dados")
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UsuarioDTO> novoUsuario(@RequestBody UsuarioDTO usuarioDto) {
+		//TODO terminar de criar o endpoint
+		return ResponseEntity.ok(service.inserir(usuarioDto));
+	}
 }
