@@ -42,7 +42,7 @@ private static Logger logger = LoggerFactory.getLogger(UsuarioService.class);
 			throw new UsernameNotFoundException("Email not found");
 		}
 		logger.info("Email found: " + username);
-		return (UserDetails) converter.toEntityToDto(usuario);
+		return converter.toEntityToDto(usuario);
 	}
 	
 }

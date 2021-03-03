@@ -11,7 +11,7 @@ public class EditoraConverter {
 	public Editora toDtoToEntity(EditoraDTO editoraDto) {
 		Editora editora = new Editora();
 		editora.setId(editoraDto.getId());
-		editora.setNome(editora.getNome());
+		editora.setNome(editoraDto.getNome());
 		return editora;
 	}
 

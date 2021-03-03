@@ -1,5 +1,7 @@
 package com.silva.training.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,8 @@ public class EditoraService {
 
 	@Transactional
 	public EditoraDTO buscarEditoraId(Long id) {
-		Editora editora = repository.findById(id).get();
-		return converter.toEntityToDto(editora);
+		Optional<Editora> editora = repository.findById(id);
+		return converter.toEntityToDto(editora.get());
 	}
 
 }
