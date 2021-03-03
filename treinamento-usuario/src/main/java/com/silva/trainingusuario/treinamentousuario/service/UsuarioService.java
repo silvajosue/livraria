@@ -16,6 +16,7 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioConverter converter;
+	
 
 	public UsuarioDTO findById(Long id) {
 		Usuario usuario = repository.findById(id).get();
@@ -24,6 +25,12 @@ public class UsuarioService {
 
 	public UsuarioDTO findByEmail(String email) {
 		Usuario usuario = repository.findByEmail(email);
+		return converter.toEntityToDto(usuario);
+	}
+
+	public UsuarioDTO inserir(UsuarioDTO usuarioDto) {
+		Usuario usuario = converter.toDtoToEntity(usuarioDto);
+		repository.save(usuario);
 		return converter.toEntityToDto(usuario);
 	}
 }
