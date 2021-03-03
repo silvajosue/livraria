@@ -25,11 +25,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private JwtTokenStore tokenStore;
 	
-	private static final String[] PUBLIC = { "/treinamento-oauth/oauth/token" };
+	private static final String[] PUBLIC = { "/treinamento-oauth/oauth/token",  "/treinamento-login/**"};
 	
 	private static final String[] OPERATOR = { "/treinamento/**" };
 	
-	private static final String[] ADMIN = { "/treinamento/**", "/treinamento-usuario/**", "/actuator/**", "/hr-worker/actuator/**", "/hr-oauth/actuator/**" };
+	private static final String[] ADMIN = { "/treinamento/**", "/treinamento-usuario/**", "/actuator/**", "/treinamento/actuator/**", "/treinamento-oauth/actuator/**" };
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
