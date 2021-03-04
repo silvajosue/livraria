@@ -30,6 +30,9 @@ public class UsuarioConverter {
 		dto.setId(usuario.getId());
 		dto.setEmail(usuario.getEmail());
 		dto.setSenha(null);
+		dto.setNome(usuario.getNome());
+		dto.setSobrenome(usuario.getSobrenome());
+		dto.setCidade(usuario.getCidade());
 		return dto;
 	}
 
@@ -38,6 +41,9 @@ public class UsuarioConverter {
 		usuario.setId(usuarioDto.getId());
 		usuario.setEmail(usuarioDto.getEmail());
 		usuario.setSenha(passwordEncoder.encode(usuarioDto.getSenha()));
+		usuario.setNome(usuarioDto.getNome());
+		usuario.setSobrenome(usuarioDto.getSobrenome());
+		usuario.setCidade(usuarioDto.getCidade());
 		return usuario;
 	}
 

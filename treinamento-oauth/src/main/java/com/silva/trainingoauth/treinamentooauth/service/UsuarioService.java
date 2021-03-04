@@ -14,16 +14,16 @@ import com.silva.trainingoauth.treinamentooauth.model.Usuario;
 import com.silva.trainingoauth.treinamentooauth.model.dtos.UsuarioDTO;
 
 @Service
-public class UsuarioService implements UserDetailsService{
+public class UsuarioService implements UserDetailsService {
 
-private static Logger logger = LoggerFactory.getLogger(UsuarioService.class);
-	
+	private static Logger logger = LoggerFactory.getLogger(UsuarioService.class);
+
 	@Autowired
 	private UserFeignClient userFeignClient;
-	
+
 	@Autowired
 	private UsuarioConverter converter;
-/*	
+
 	public UsuarioDTO findByEmail(String email) {
 		Usuario usuario = userFeignClient.findByEmail(email).getBody();
 		if (usuario == null) {
@@ -33,8 +33,7 @@ private static Logger logger = LoggerFactory.getLogger(UsuarioService.class);
 		logger.info("Email found: " + email);
 		return converter.toEntityToDto(usuario);
 	}
-	Não necessario
-*/
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = userFeignClient.findByEmail(username).getBody();
@@ -45,5 +44,5 @@ private static Logger logger = LoggerFactory.getLogger(UsuarioService.class);
 		logger.info("Email found: " + username);
 		return converter.toEntityToDto(usuario);
 	}
-	
+
 }

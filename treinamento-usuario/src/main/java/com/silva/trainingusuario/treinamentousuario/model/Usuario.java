@@ -24,7 +24,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = -8613173488691302657L;
 
 	@Id
-	@Column(name = "CO_LIVRO")
+	@Column(name = "CO_USUARIO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -33,4 +33,13 @@ public class Usuario implements Serializable {
 
 	@Column(name = "PS_SENHA")
 	private String senha;
+	
+	@Column(name = "NO_USUARIO")
+	private String nome;
+
+	@Column(name = "NO_SOBRENOME_USUARIO")
+	private String sobrenome;
+
+	@Column(name = "NO_CIDADE")
+	private String cidade;
 }

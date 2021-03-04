@@ -33,4 +33,13 @@ public class Usuario implements Serializable {
 
 	@Column(name = "PS_SENHA")
 	private String senha;
+	
+	@Column(name = "NO_USUARIO")
+	private String nome;
+	
+	@Column(name = "NO_SOBRENOME_USUARIO")
+	private String sobrenome;
+	
+	@Column(name = "NO_CIDADE")
+	private String cidade;
 }

@@ -19,4 +19,10 @@ public class UsuarioDTO implements Serializable {
 	private String email;
 
 	private String senha;
+	
+	private String nome;
+	
+	private String sobrenome;
+	
+	private String cidade;
 }

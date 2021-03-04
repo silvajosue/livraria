@@ -27,9 +27,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] PUBLIC = { "/treinamento-oauth/oauth/token",  "/treinamento-login/**"};
 	
-	private static final String[] OPERATOR = { "/treinamento/**" };
+	private static final String[] USUARIO = { "/treinamento/**",  "/treinamento-usuario/**", "/treinamento-login/atualizar"};
 	
-	private static final String[] ADMIN = { "/treinamento/**", "/treinamento-usuario/**", "/actuator/**", "/treinamento/actuator/**", "/treinamento-oauth/actuator/**" };
+	private static final String[] ADMIN = { "/treinamento/**", "/treinamento-usuario/**", "/actuator/**", "/treinamento/actuator/**", "/treinamento-oauth/actuator/**", "/treinamento-login/actuator/**" };
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -43,8 +43,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.GET, OPERATOR).hasAnyRole("OPERATOR", "ADMIN")
-		.antMatchers(ADMIN).hasRole("ADMIN")
 		.anyRequest().authenticated();
 		
 		http.cors().configurationSource(corsConfigurationSource());
@@ -56,7 +54,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		corsConfig.setAllowedOrigins(Arrays.asList("*"));
 		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
 		corsConfig.setAllowCredentials(true);
-		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+		corsConfig.setAllowedHeaders(Arrays.asList("Content-Type"));
 		
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", corsConfig);

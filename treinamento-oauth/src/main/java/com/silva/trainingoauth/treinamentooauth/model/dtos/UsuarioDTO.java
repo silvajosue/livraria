@@ -27,12 +27,20 @@ public class UsuarioDTO implements UserDetails, Serializable {
 	private String email;
 
 	private String senha;
+	
+	private String aut = "PUBLIC";
 
 	private Set<UsuarioDTO> dto = new HashSet<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return dto.stream().map(x -> new SimpleGrantedAuthority(x.getUsername())).collect(Collectors.toList());
+		return dto.stream().map(x -> new SimpleGrantedAuthority(x.getAut())).collect(Collectors.toList());
+	}
+
+	public UsuarioDTO(Long id, String email, String senha) {
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
 	}
 
 	@Override

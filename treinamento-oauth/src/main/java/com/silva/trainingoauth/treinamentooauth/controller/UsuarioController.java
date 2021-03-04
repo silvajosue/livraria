@@ -21,7 +21,7 @@ public class UsuarioController {
 	@GetMapping(value = "/buscar-email")
 	public ResponseEntity<UserDetails> findByEmail(@RequestParam String email) {
 		try {
-			return ResponseEntity.ok(service.loadUserByUsername(email));
+			return ResponseEntity.ok(service.findByEmail(email));
 		}
 		catch (IllegalArgumentException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
