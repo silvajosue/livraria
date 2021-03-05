@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ public class UsuarioController {
 
 private static Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 	
-	@Value("${test:config}")
+	@Value("${test.config}")
 	private String testConfig;
 	
 	@Autowired
@@ -66,7 +67,7 @@ private static Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 	}
 	
 	@ApiOperation(value = "Endpoint responsavel por atualizar um novo usuario no banco de dados")
-	@PostMapping(value = "/atualizar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/atualizar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO usuarioDto) {
 		return ResponseEntity.ok(service.atualizar(usuarioDto));
 	}

@@ -25,26 +25,23 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private JwtTokenStore tokenStore;
 
-	private static final String[] PUBLIC = { "/treinamento-oauth/oauth/token", "/treinamento-login/**" };
+	private static final String[] PUBLIC = { "/treinamento-oauth/oauth/token" };
 
-	private static final String[] USUARIO = { "/treinamento/**", "/treinamento-usuario/**",
-			"/treinamento-login/atualizar" };
+	private static final String[] USUARIO = { "/treinamento-usuario/**" };
 
 	private static final String[] ADMIN = { "/treinamento/**", "/treinamento-usuario/**", "/actuator/**",
-			"/treinamento/actuator/**", "/treinamento-oauth/actuator/**", "/treinamento-login/actuator/**" };
+			"/treinamento-login/actuator/**", "/hr-oauth/actuator/**" };
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 		resources.tokenStore(tokenStore);
 	}
 
-	// TODO vai dar errado essas autorizações
-
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests().antMatchers(PUBLIC).permitAll().antMatchers(HttpMethod.GET, USUARIO)
-				.hasAnyRole("USUARIO", "PUBLIC").antMatchers(ADMIN).hasAnyRole("ADMIN").anyRequest().authenticated();
+				.hasAnyRole("USUARIO", "ADMIN").antMatchers(ADMIN).hasRole("ADMIN").anyRequest().authenticated();
 
 		http.cors().configurationSource(corsConfigurationSource());
 	}

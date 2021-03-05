@@ -1,6 +1,8 @@
 package com.silva.trainingusuario.treinamentousuario.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -36,7 +39,7 @@ public class Usuario implements Serializable {
 
 	@Column(name = "PS_SENHA")
 	private String senha;
-	
+
 	@Column(name = "NO_USUARIO")
 	private String nome;
 
@@ -45,8 +48,19 @@ public class Usuario implements Serializable {
 
 	@Column(name = "NO_CIDADE")
 	private String cidade;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "CO_AUTORIZACAO")
-	private Autorizacao autorizacao;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "TB_USUARIO_AUTORIZACAO", joinColumns = @JoinColumn(name = "CO_USUARIO"), inverseJoinColumns = @JoinColumn(name = "CO_AUTORIZACAO"))
+	private Set<Autorizacao> aut = new HashSet<>();
+
+	public Usuario(Long id, String email, String senha, String nome, String sobrenome, String cidade) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.cidade = cidade;
+	}
+
 }

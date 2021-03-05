@@ -1,14 +1,14 @@
 package com.silva.trainingusuario.treinamentousuario.model.dtos;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class UsuarioDTO implements Serializable {
 
 	/**
@@ -21,12 +21,23 @@ public class UsuarioDTO implements Serializable {
 	private String email;
 
 	private String senha;
-	
+
 	private String nome;
-	
+
 	private String sobrenome;
-	
+
 	private String cidade;
-	
-	private AutorizacaoDTO autorizacao;
+
+	private Set<AutorizacaoDTO> aut = new HashSet<>();
+
+	public UsuarioDTO(Long id, String email, String senha, String nome, String sobrenome, String cidade) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.cidade = cidade;
+	}
+
 }

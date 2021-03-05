@@ -42,6 +42,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		System.out.println("Cliente: " + clientName);
+		System.out.println("Secret: " + clientSecret);
 		clients.inMemory().withClient(clientName).secret(passwordEncoder.encode(clientSecret)).scopes("read", "write")
 				.authorizedGrantTypes("password").accessTokenValiditySeconds(86400);
 	}

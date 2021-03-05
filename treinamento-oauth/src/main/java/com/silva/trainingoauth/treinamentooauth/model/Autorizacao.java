@@ -9,13 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Autorizacao implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4197771276850688794L;
+	private static final long serialVersionUID = -3712234395987218193L;
 
 	private Long id;
 

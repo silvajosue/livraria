@@ -10,13 +10,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class UsuarioDTO implements UserDetails, Serializable {
 
 	/**
@@ -30,14 +28,33 @@ public class UsuarioDTO implements UserDetails, Serializable {
 
 	private String senha;
 
-	private AutorizacaoDTO dto = new AutorizacaoDTO(2L, "ADMIN");
+	private String nome;
+
+	private String sobrenome;
+
+	private String cidade;
+
+	private Set<AutorizacaoDTO> aut = new HashSet<>();
+
+	public UsuarioDTO(Long id, String email, String senha, String nome, String sobrenome, String cidade) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.cidade = cidade;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<AutorizacaoDTO> aut = new HashSet<AutorizacaoDTO>();
-		aut.add(dto);
-		return aut.stream().map(x -> new SimpleGrantedAuthority(x.getAutorizacao().toUpperCase()))
+		return aut.stream().map(x -> new SimpleGrantedAuthority(x.getAutorizacao()))
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public String getPassword() {
+		return senha;
 	}
 
 	@Override
@@ -65,8 +82,4 @@ public class UsuarioDTO implements UserDetails, Serializable {
 		return true;
 	}
 
-	@Override
-	public String getPassword() {
-		return this.getSenha();
-	}
 }
