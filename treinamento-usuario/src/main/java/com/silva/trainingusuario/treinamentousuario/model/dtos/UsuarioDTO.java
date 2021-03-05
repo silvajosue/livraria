@@ -2,11 +2,13 @@ package com.silva.trainingusuario.treinamentousuario.model.dtos;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioDTO implements Serializable {
 
 	/**
@@ -25,4 +27,6 @@ public class UsuarioDTO implements Serializable {
 	private String sobrenome;
 	
 	private String cidade;
+	
+	private AutorizacaoDTO autorizacao;
 }

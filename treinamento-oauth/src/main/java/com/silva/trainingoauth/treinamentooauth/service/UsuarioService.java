@@ -8,9 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.silva.trainingoauth.treinamentooauth.converter.UsuarioConverter;
 import com.silva.trainingoauth.treinamentooauth.feignclients.UserFeignClient;
-import com.silva.trainingoauth.treinamentooauth.model.Usuario;
 import com.silva.trainingoauth.treinamentooauth.model.dtos.UsuarioDTO;
 
 @Service
@@ -21,28 +19,25 @@ public class UsuarioService implements UserDetailsService {
 	@Autowired
 	private UserFeignClient userFeignClient;
 
-	@Autowired
-	private UsuarioConverter converter;
-
 	public UsuarioDTO findByEmail(String email) {
-		Usuario usuario = userFeignClient.findByEmail(email).getBody();
-		if (usuario == null) {
+		UsuarioDTO usuarioDto = userFeignClient.findByEmail(email).getBody();
+		if (usuarioDto == null) {
 			logger.error("Email not found: " + email);
 			throw new IllegalArgumentException("Email not found");
 		}
 		logger.info("Email found: " + email);
-		return converter.toEntityToDto(usuario);
+		return usuarioDto;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = userFeignClient.findByEmail(username).getBody();
-		if (usuario == null) {
+		UsuarioDTO usuarioDto = userFeignClient.findByEmail(username).getBody();
+		if (usuarioDto == null) {
 			logger.error("Email not found: " + username);
 			throw new UsernameNotFoundException("Email not found");
 		}
 		logger.info("Email found: " + username);
-		return converter.toEntityToDto(usuario);
+		return usuarioDto;
 	}
 
 }

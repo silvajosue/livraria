@@ -17,7 +17,7 @@ public class UsuarioService {
 
 	@Autowired
 	private IUsuarioRepository repository;
-	
+
 	@Autowired
 	private UsuarioConverter converter;
 
@@ -32,9 +32,16 @@ public class UsuarioService {
 		Usuario usuario = repository.findById(id).get();
 		return converter.toEntityToDto(usuario);
 	}
-	
+
 	@Transactional
 	public UsuarioDTO inserir(UsuarioDTO usuarioDto) {
+		Usuario usuario = converter.toDtoToEntity(usuarioDto);
+		repository.save(usuario);
+		return converter.toEntityToDto(usuario);
+	}
+
+	@Transactional
+	public UsuarioDTO atualizar(UsuarioDTO usuarioDto) {
 		Usuario usuario = converter.toDtoToEntity(usuarioDto);
 		repository.save(usuario);
 		return converter.toEntityToDto(usuario);

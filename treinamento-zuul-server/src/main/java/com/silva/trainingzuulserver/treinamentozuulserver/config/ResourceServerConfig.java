@@ -24,47 +24,48 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Autowired
 	private JwtTokenStore tokenStore;
-	
-	private static final String[] PUBLIC = { "/treinamento-oauth/oauth/token",  "/treinamento-login/**"};
-	
-	private static final String[] USUARIO = { "/treinamento/**",  "/treinamento-usuario/**", "/treinamento-login/atualizar"};
-	
-	private static final String[] ADMIN = { "/treinamento/**", "/treinamento-usuario/**", "/actuator/**", "/treinamento/actuator/**", "/treinamento-oauth/actuator/**", "/treinamento-login/actuator/**" };
-	
+
+	private static final String[] PUBLIC = { "/treinamento-oauth/oauth/token", "/treinamento-login/**" };
+
+	private static final String[] USUARIO = { "/treinamento/**", "/treinamento-usuario/**",
+			"/treinamento-login/atualizar" };
+
+	private static final String[] ADMIN = { "/treinamento/**", "/treinamento-usuario/**", "/actuator/**",
+			"/treinamento/actuator/**", "/treinamento-oauth/actuator/**", "/treinamento-login/actuator/**" };
+
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 		resources.tokenStore(tokenStore);
 	}
 
-	//TODO vai dar errado essas autorizações
-	
+	// TODO vai dar errado essas autorizações
+
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		
-		http.authorizeRequests()
-		.antMatchers(PUBLIC).permitAll()
-		.anyRequest().authenticated();
-		
+
+		http.authorizeRequests().antMatchers(PUBLIC).permitAll().antMatchers(HttpMethod.GET, USUARIO)
+				.hasAnyRole("USUARIO", "PUBLIC").antMatchers(ADMIN).hasAnyRole("ADMIN").anyRequest().authenticated();
+
 		http.cors().configurationSource(corsConfigurationSource());
 	}
-	
+
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
 		corsConfig.setAllowedOrigins(Arrays.asList("*"));
 		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
 		corsConfig.setAllowCredentials(true);
-		corsConfig.setAllowedHeaders(Arrays.asList("Content-Type"));
-		
+		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", corsConfig);
 		return source;
 	}
-	
+
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		FilterRegistrationBean<CorsFilter> bean 
-			= new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
+		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
+				new CorsFilter(corsConfigurationSource()));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}

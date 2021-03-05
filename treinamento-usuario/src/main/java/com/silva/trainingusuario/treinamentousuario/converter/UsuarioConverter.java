@@ -9,9 +9,12 @@ import com.silva.trainingusuario.treinamentousuario.model.dtos.UsuarioDTO;
 
 @Component
 public class UsuarioConverter {
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+
+	@Autowired
+	private AutorizacaoConverter autorizacaoConverter;
 
 	public UsuarioDTO toEntityToDto(Usuario usuario) {
 		UsuarioDTO dto = new UsuarioDTO();
@@ -21,6 +24,7 @@ public class UsuarioConverter {
 		dto.setNome(usuario.getNome());
 		dto.setSobrenome(usuario.getSobrenome());
 		dto.setCidade(usuario.getCidade());
+		dto.setAutorizacao(autorizacaoConverter.toEntityToDto(usuario.getAutorizacao()));
 		return dto;
 	}
 
@@ -32,6 +36,7 @@ public class UsuarioConverter {
 		usuario.setNome(usuarioDto.getNome());
 		usuario.setSobrenome(usuarioDto.getSobrenome());
 		usuario.setCidade(usuarioDto.getCidade());
+		usuario.setAutorizacao(usuarioDto.getAutorizacao() != null ? autorizacaoConverter.toDtoToEntity(usuarioDto.getAutorizacao()) : null);
 		return usuario;
 	}
 

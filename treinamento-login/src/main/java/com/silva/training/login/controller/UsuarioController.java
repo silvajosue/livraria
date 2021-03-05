@@ -64,4 +64,10 @@ private static Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 		//TODO terminar de criar o endpoint
 		return ResponseEntity.ok(service.inserir(usuarioDto));
 	}
+	
+	@ApiOperation(value = "Endpoint responsavel por atualizar um novo usuario no banco de dados")
+	@PostMapping(value = "/atualizar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO usuarioDto) {
+		return ResponseEntity.ok(service.atualizar(usuarioDto));
+	}
 }

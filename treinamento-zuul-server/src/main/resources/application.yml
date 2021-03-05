@@ -26,3 +26,14 @@ zuul:
       path: /treinamento-oauth/**
       sensitive-headers: Cookie,Set-Cookie
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+            
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 20000

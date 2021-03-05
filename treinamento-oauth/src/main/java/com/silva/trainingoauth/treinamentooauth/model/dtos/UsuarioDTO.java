@@ -10,11 +10,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioDTO implements UserDetails, Serializable {
 
 	/**
@@ -27,20 +29,15 @@ public class UsuarioDTO implements UserDetails, Serializable {
 	private String email;
 
 	private String senha;
-	
-	private String aut = "PUBLIC";
 
-	private Set<UsuarioDTO> dto = new HashSet<>();
+	private AutorizacaoDTO dto = new AutorizacaoDTO(2L, "ADMIN");
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return dto.stream().map(x -> new SimpleGrantedAuthority(x.getAut())).collect(Collectors.toList());
-	}
-
-	public UsuarioDTO(Long id, String email, String senha) {
-		this.id = id;
-		this.email = email;
-		this.senha = senha;
+		Set<AutorizacaoDTO> aut = new HashSet<AutorizacaoDTO>();
+		aut.add(dto);
+		return aut.stream().map(x -> new SimpleGrantedAuthority(x.getAutorizacao().toUpperCase()))
+				.collect(Collectors.toList());
 	}
 
 	@Override
