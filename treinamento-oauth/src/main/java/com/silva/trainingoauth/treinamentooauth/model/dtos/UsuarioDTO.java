@@ -48,8 +48,7 @@ public class UsuarioDTO implements UserDetails, Serializable {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return aut.stream().map(x -> new SimpleGrantedAuthority(x.getAutorizacao()))
-				.collect(Collectors.toList());
+		return aut.stream().map(x -> new SimpleGrantedAuthority(x.getAutorizacao())).collect(Collectors.toList());
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class UsuarioController {
 
 private static Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 	
-	@Value("${test.config}")
+	@Value("${test:config}")
 	private String testConfig;
 	
 	@Autowired
@@ -60,7 +60,7 @@ private static Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 	}
 	
 	@ApiOperation(value = "Endpoint responsavel por criar um novo usuario no banco de dados")
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/inserir", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UsuarioDTO> novoUsuario(@RequestBody UsuarioDTO usuarioDto) {
 		//TODO terminar de criar o endpoint
 		return ResponseEntity.ok(service.inserir(usuarioDto));

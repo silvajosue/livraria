@@ -24,7 +24,7 @@ public class UsuarioConverter {
 		dto.setNome(usuario.getNome());
 		dto.setSobrenome(usuario.getSobrenome());
 		dto.setCidade(usuario.getCidade());
-		dto.setAut(autorizacaoConverter.toListEntityToDto(usuario.getAut()));
+		dto.setAut(usuario.getAut() != null ? autorizacaoConverter.toListEntityToDto(usuario.getAut()) : null);
 		return dto;
 	}
 

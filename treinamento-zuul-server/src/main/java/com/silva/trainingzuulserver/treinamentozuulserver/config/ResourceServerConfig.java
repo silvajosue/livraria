@@ -25,12 +25,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
 	private JwtTokenStore tokenStore;
 
-	private static final String[] PUBLIC = { "/treinamento-oauth/oauth/token" };
+	private static final String[] PUBLIC = { "/treinamento-oauth/oauth/token", "/treinamento-login/usuarios/inserir" };
 
-	private static final String[] USUARIO = { "/treinamento-usuario/**" };
+	private static final String[] OPERATOR = { "/treinamento-usuario/**" };
 
-	private static final String[] ADMIN = { "/treinamento/**", "/treinamento-usuario/**", "/actuator/**",
-			"/treinamento-login/actuator/**", "/hr-oauth/actuator/**" };
+	private static final String[] ADMIN = { "/treinamento/**", "/treinamento-login/**", "/actuator/**", "/treinamento-usuario/actuator/**",
+			"/treinamento-oauth/actuator/**" };
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -40,8 +40,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers(PUBLIC).permitAll().antMatchers(HttpMethod.GET, USUARIO)
-				.hasAnyRole("USUARIO", "ADMIN").antMatchers(ADMIN).hasRole("ADMIN").anyRequest().authenticated();
+		http.authorizeRequests().antMatchers(PUBLIC).permitAll().antMatchers(HttpMethod.GET, OPERATOR)
+				.hasAnyRole("OPERATOR", "ADMIN").antMatchers(ADMIN).hasRole("ADMIN").anyRequest().authenticated();
 
 		http.cors().configurationSource(corsConfigurationSource());
 	}

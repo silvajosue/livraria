@@ -12,13 +12,13 @@ eureka:
 
 zuul:
   routes:
-    worker:
+    usuario:
       service-id: treinamento-usuario
       path: /treinamento-usuario/**
-    payroll:
+    treinamento:
       service-id: treinamento
       path: /treinamento/**
-    user:
+    login:
       service-id: treinamento-login
       path: /treinamento-login/**
     oauth:
